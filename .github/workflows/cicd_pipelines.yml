@@ -24,23 +24,23 @@ jobs:
             echo "Berhasil Terhubung Ke Server"
 
             # Ensure the target directory exists
-            mkdir -p /home/cicd/cicd_database_example
-            cd /home/cicd/cicd_database_example
+            mkdir -p /home/cicd/cicd_hehe
+            cd /home/cicd/cicd_hehe
             ls  
             echo "Berhasil Masuk Ke Folder CICD Database Exercise"
 
-            # Ensure proper permissions
-            sudo chown -R $USER:$USER .
+            # Set ownership to root explicitly
+            sudo chown -R root:root .
             
-            # Use Git to deploy the code
+            # Use Git to deploy the code with root privileges
             if [ -d ".git" ]; then
               echo "Git directory exists, pulling latest changes"
-              git fetch origin main
-              git reset --hard origin/main
+              sudo git fetch origin main
+              sudo git reset --hard origin/main
               echo "Successfully updated from Git repository"
             else
               echo "Git directory does not exist, cloning repository"
-              git clone https://github.com/PliTheGeek/cicd_example .
+              sudo git clone https://github.com/PliTheGeek/cicd_example .
               echo "Successfully cloned repository"
             fi
             

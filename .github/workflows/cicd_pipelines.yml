@@ -42,8 +42,8 @@ jobs:
             # Fixed the space issue in the git check
             if [ -d ".git" ]; then
               echo "Git directory exists, pulling latest changes"
-              git pull origin main
+              sudo git pull origin main
             else
               echo "Git directory does not exist, cloning repository"
-              git clone
+              sudo git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git .
             fi

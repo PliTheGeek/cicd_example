@@ -45,5 +45,5 @@ jobs:
               sudo git pull origin main
             else
               echo "Git directory does not exist, cloning repository"
-              sudo git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git .
+              sudo git clone https://github.com/PliTheGeek/cicd_example.git .
             fi

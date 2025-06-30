@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3'
 
 services:
   # Layanan MySQL untuk Development
@@ -30,6 +30,14 @@ services:
       - prod_network
     ports:
       - "3308:3306"  # Expose port 3308 di host untuk akses production
+
+  webserver:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/usr/share/nginx/html
+    restart: always
 
 # Volume untuk menyimpan data MySQL
 volumes:

@@ -44,7 +44,7 @@ jobs:
               echo "Successfully cloned repository"
             fi
             
-            # Run Docker compose after the code is updated
+            # Run Docker compose to start the web server
             docker compose up -d 
-            echo "Berhasil Menjalankan Docker Compose"
+            echo "Web server is now running on port 80"
             EOT

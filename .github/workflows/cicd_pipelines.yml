@@ -21,10 +21,10 @@ jobs:
           username: ${{ secrets.SERVER_NAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: | 
+            # Immediately switch to root to avoid home directory permission issues
+            sudo -i
+            
             echo "Berhasil Terhubung Ke Server"
-
-            # Switch to root user first
-            sudo -i << 'EOF'
             
             # Ensure the target directory exists
             mkdir -p /home/cicd/cicd_hehe
@@ -32,7 +32,7 @@ jobs:
             ls  
             echo "Berhasil Masuk Ke Folder CICD Database Exercise"
 
-            # No need for sudo anymore since we're already root
+            # Set proper ownership
             chown -R root:root .
             
             # Use Git to deploy the code with root privileges
@@ -50,4 +50,3 @@ jobs:
             # Run Docker compose after the code is updated
             docker compose up -d 
             echo "Berhasil Menjalankan Docker Compose"
-            EOF

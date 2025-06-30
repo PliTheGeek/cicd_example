@@ -23,27 +23,31 @@ jobs:
           script: | 
             echo "Berhasil Terhubung Ke Server"
 
+            # Switch to root user first
+            sudo -i << 'EOF'
+            
             # Ensure the target directory exists
             mkdir -p /home/cicd/cicd_hehe
             cd /home/cicd/cicd_hehe
             ls  
             echo "Berhasil Masuk Ke Folder CICD Database Exercise"
 
-            # Set ownership to root explicitly
-            sudo chown -R root:root .
+            # No need for sudo anymore since we're already root
+            chown -R root:root .
             
             # Use Git to deploy the code with root privileges
             if [ -d ".git" ]; then
               echo "Git directory exists, pulling latest changes"
-              sudo git fetch origin main
-              sudo git reset --hard origin/main
+              git fetch origin main
+              git reset --hard origin/main
               echo "Successfully updated from Git repository"
             else
               echo "Git directory does not exist, cloning repository"
-              sudo git clone https://github.com/PliTheGeek/cicd_example .
+              git clone https://github.com/PliTheGeek/cicd_example .
               echo "Successfully cloned repository"
             fi
             
             # Run Docker compose after the code is updated
-            sudo docker compose up -d 
+            docker compose up -d 
             echo "Berhasil Menjalankan Docker Compose"
+            EOF

@@ -32,8 +32,6 @@ jobs:
             ls  
             echo "Berhasil Masuk Ke Folder CICD Database Exercise"
 
-            # Set proper ownership
-            chown -R root:root .
             
             # Use Git to deploy the code with root privileges
             if [ -d ".git" ]; then

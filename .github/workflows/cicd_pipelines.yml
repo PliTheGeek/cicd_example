@@ -21,17 +21,16 @@ jobs:
           username: ${{ secrets.SERVER_NAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: | 
-            # Immediately switch to root to avoid home directory permission issues
-            sudo -i
+            # Switch to root using a single command that works well in automation
+            sudo -E bash << 'EOT'
             
             echo "Berhasil Terhubung Ke Server"
             
             # Ensure the target directory exists
-            mkdir -p /home/cicd/cicd_hehe
-            cd /home/cicd/cicd_hehe
+            mkdir -p /home/cicd/cicd_hai
+            cd /home/cicd/cicd_hai
             ls  
             echo "Berhasil Masuk Ke Folder CICD Database Exercise"
-
             
             # Use Git to deploy the code with root privileges
             if [ -d ".git" ]; then
@@ -48,3 +47,4 @@ jobs:
             # Run Docker compose after the code is updated
             docker compose up -d 
             echo "Berhasil Menjalankan Docker Compose"
+            EOT
